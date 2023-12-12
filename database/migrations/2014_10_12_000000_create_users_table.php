@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('gender',['ذكر','أنثى'])->default('ذكر');
             $table->integer('age')->default(34);
             $table->string('start_smoking')->nullable();
+            $table->string('day_quit')->default(now()->toDateString());
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

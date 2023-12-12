@@ -5,8 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
-
+    <title>Turn It Now</title>
+    {{--    for add icon tab --}}
+    <link rel="icon" type="image/x-icon" href="{{asset('assets/Images/cigarettes-smoking.jpg')}}">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
@@ -24,19 +25,32 @@
         ::after, ::before {
             --tw-content: ''
         }
-
+        @font-face {
+            font-family: 'RethinkSansBold';
+            src: url('assets/Fonts/Rethink_Sans/static/RethinkSans-Bold.ttf');
+            font-weight: bold;
+            /* Add additional font variations if needed */
+        }
+        @font-face {
+            font-family: 'RethinkSansItalic';
+            src: url('assets/Fonts/Rethink_Sans/static/RethinkSans-Italic.ttf');
+            font-weight: 100;
+            /* Add additional font variations if needed */
+        }
         html {
             line-height: 1.5;
             -webkit-text-size-adjust: 100%;
             -moz-tab-size: 4;
             tab-size: 4;
-            font-family: Figtree, sans-serif;
-            font-feature-settings: normal
+            /*font-family: Figtree, sans-serif;*/
+            font-feature-settings: normal;
+            font-family: Robot !important;
         }
 
         body {
             margin: 0;
-            line-height: inherit
+            line-height: inherit;
+            font-family: Robot !important;
         }
 
         hr {
@@ -779,6 +793,7 @@
                 padding: 2rem
             }
         }
+
     </style>
     @vite('resources/css/app.css')
 

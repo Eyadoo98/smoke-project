@@ -1,26 +1,36 @@
 @extends('layouts.app')
 <style>
 
+    @media screen and (max-width: 767px) {
+        .card-body {
+            text-align: right !important;
+        }
 
+        .form-check-input {
+            float: unset !important;
+            margin-left: 10px !important;
+        }
+    }
 </style>
 @section('content')
     <div class="container" style="">
         <div class="row justify-content-center" style="margin: auto">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header" style="text-align: right;background-color: #efb448;color: white;">{{ __('تسجيل الدخول') }}</div>
+                    <div class="card-header"
+                         style="text-align: right;background-color: #efb448;color: white; font-family: Robot;">{{ __('تسجيل الدخول') }}</div>
 
                     <div class="card-body">
-                                            <form method="POST" action="{{ route('login') }}">
-{{--                        <form method="get" action="{{ route('score-page') }}">--}}
+                        <form method="POST" action="{{ route('login') }}">
+                            {{--                        <form method="get" action="{{ route('score-page') }}">--}}
                             @csrf
 
                             <div class="row mb-3">
                                 <label for="email"
-                                       class="col-md-4 col-form-label text-md-end">{{ __('الإيميل') }}</label>
+                                       class="col-md-4 col-form-label text-md-end" style="font-family: Robot ;">{{ __('الإيميل') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email"
+                                    <input id="email" type="email" style="font-family: Robot ;"
                                            class="form-control @error('email') is-invalid @enderror" name="email"
                                            value="{{ old('email') }}" required autocomplete="email" autofocus>
 
@@ -33,7 +43,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="password"
+                                <label for="password" style="font-family: Robot ;"
                                        class="col-md-4 col-form-label text-md-end">{{ __('كلمة السر') }}</label>
 
                                 <div class="col-md-6">
@@ -52,7 +62,7 @@
                             <div class="row mb-3">
                                 <div class="col-md-6 offset-md-4">
                                     <div class="form-check">
-                                        <label class="form-check-label" for="remember">
+                                        <label class="form-check-label" for="remember" style="font-family: Robot ;">
                                             {{ __('تذكرني') }}
                                         </label>
                                         <input class="form-check-input" type="checkbox" name="remember"
@@ -68,22 +78,23 @@
 
 
                                     @if (Route::has('password.request'))
-{{--                                        <a class="btn btn-link" href="{{ route('password.request') }}">--}}
-{{--                                            {{ __('Forgot Your Password?') }}--}}
-{{--                                        </a>--}}
-                                        <a class="btn btn-link" href="{{ route('wizard-form') }}">
+                                        {{--                                        <a class="btn btn-link" href="{{ route('password.request') }}">--}}
+                                        {{--                                            {{ __('Forgot Your Password?') }}--}}
+                                        {{--                                        </a>--}}
+                                        <a class="btn btn-link" href="{{ route('wizard-form') }}" style="font-family: Robot;">
                                             {{ __('تسجيل حساب جديد؟') }}
                                         </a>
                                     @endif
-                                        <button type="submit" class="btn btn-primary loginBtn" style="background-color: #efb448;border-color: #efb448">
-                                            {{ __('تسجيل الدخول') }}
-                                        </button>
+                                    <button type="submit" class="btn btn-primary loginBtn"
+                                            style="background-color: #efb448;border-color: #efb448;font-family: Robot;">
+                                        {{ __('تسجيل الدخول') }}
+                                    </button>
 
                                 </div>
                                 <br>
-{{--                                <a class="btn btn-link" href="{{ route('wizard-form') }}">--}}
-{{--                                    {{ __('Register Now?') }}--}}
-{{--                                </a>--}}
+                                {{--                                <a class="btn btn-link" href="{{ route('wizard-form') }}">--}}
+                                {{--                                    {{ __('Register Now?') }}--}}
+                                {{--                                </a>--}}
                             </div>
                         </form>
                     </div>

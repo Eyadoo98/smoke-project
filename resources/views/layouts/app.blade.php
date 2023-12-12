@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Turn It Now</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -17,6 +17,14 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     {{--    @vite('resources/css/app.css')--}}
 {{--    @livewireStyles--}}
+
+    <style>
+        @media screen and (max-width:767px){
+            .navbar-toggler-icon{
+                display: none !important;
+            }
+        }
+    </style>
 </head>
 <body>
 

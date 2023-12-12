@@ -21,7 +21,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/score-page', [App\Http\Controllers\ScorePageController::class, 'index'])->name('score-page')->middleware('auth');
+//Route::get('/score-page', [App\Http\Controllers\ScorePageController::class, 'index'])->name('score-page')->middleware(['auth','track_user_time']);
+Route::get('/score-page', \App\Livewire\ScoreComponent::class)->name('score-page')->middleware(['auth','track_user_time']);
 
 Auth::routes();
 

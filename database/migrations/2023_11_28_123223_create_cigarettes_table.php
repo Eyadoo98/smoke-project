@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('count_per_day')->nullable();
             $table->string('count_per_week')->nullable();
             $table->string('price')->nullable();
+            $table->string('avoidedCigarette')->nullable();
             $table->date('start_date')->nullable();
             $table->timestamps();
         });

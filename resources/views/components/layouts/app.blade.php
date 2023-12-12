@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Turn It Now</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -26,7 +26,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="background-color: black !important;">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}" style="color: white">
+            <a class="navbar-brand ml-2" href="{{ url('/') }}" style="color: white">
                 اطفيها الأن
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -81,7 +81,8 @@
         </div>
     </nav>
 
-    <main class="py-4">
+{{--    class="py-4"--}}
+    <main >
         @yield('content')
         {{--        <div class="container mx-auto">--}}
         {{--            <div class="flex ">--}}

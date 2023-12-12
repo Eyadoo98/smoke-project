@@ -1,7 +1,14 @@
+<style>
+    @media screen and (max-width: 767px) {
+        .custom-section {
+            text-align: right !important;
+        }
+    }
+</style>
 <div class="container">
     <div class="row justify-content-center setup-content {{ $currentStep != 1 ? 'display-none' : '' }}"
          id="step-1">
-        <div class="col-md-8">
+        <div class="col-md-8 custom-section">
             <div class="card" style="direction: rtl;">
                 <div class="card-header" style="background-color: #efb448;color: white;text-align: right;margin-bottom: 20px;">{{ __('تسجيل  بيانات جديدة') }}</div>
 

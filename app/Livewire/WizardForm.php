@@ -49,6 +49,7 @@ class WizardForm extends Component
     public string $spendDayNormalCigarette;
     public string $spendWeekNormalCigarette;
 
+    public $takenCigarette;
 //     this five function for save checkbox of user in cookie *********** start ***********
     public function checkBoxTypeCigarette($ids)
     {
@@ -160,8 +161,10 @@ class WizardForm extends Component
 
     public function thirdStepSubmit()//for start smoking
     {
-
         //make Validation here if u want
+        $validatedData = $this->validate([
+            'startSmokingAge' => 'required',
+        ]);
         \Illuminate\Support\Facades\Cookie::queue('wizard_step', $this->currentStep + 1, 60);
         Cookie::queue('formDataStartSmokingAge', json_encode($this->startSmokingAge), 60);
         $this->currentStep = 4;
@@ -206,6 +209,7 @@ class WizardForm extends Component
             $user->password = $this->password;
             $user->gender = $this->gender ? 'ذكر' : 'انثى';
             $user->age = $this->age;
+            $user->day_quit = now()->toDateString();
             $user->start_smoking = $this->startSmokingAge;
             $user->save();
             foreach ($arrCheckboxNameStartSmoking as $key => $checkboxId) {
@@ -225,6 +229,7 @@ class WizardForm extends Component
 
             foreach ($arrCheckboxTypeCigarette as $key => $checkboxId) {
                 $cigarette = new Cigarette();
+                $cigarette->start_date = now()->toDateString();
                 if ($key == 1) {
                     $cigarette->type_of_smoking = 'سيجارة لكترونية';;
                     if (!empty($this->electronicCigarette)) {
@@ -237,6 +242,7 @@ class WizardForm extends Component
                     }
                     if (!empty($this->spendDayNormalCigarette)) {
                         $cigarette->count_per_day = $this->spendDayNormalCigarette;
+                        $cigarette->avoidedCigarette = $this->spendDayNormalCigarette;
                     }
                     if (!empty($this->spendWeekNormalCigarette)) {
                         $cigarette->count_per_week = $this->spendWeekNormalCigarette;

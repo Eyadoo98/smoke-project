@@ -1,0 +1,86 @@
+version: '3'
+networks:
+    turnItOff:
+
+services:
+    site:
+        build:
+            context: ./docker
+            dockerfile: nginx.dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        ports:
+            - 80:80
+        restart: always
+        volumes:
+            - '.:/var/www/html'
+            - './certbot/www:/var/www/certbot/:ro'
+            - './certbot/conf/:/etc/nginx/ssl/:ro'
+        depends_on:
+            - php
+            - mysql
+        networks:
+            - turnItOff
+    certbot:
+        image: certbot/certbot:arm32v6-latest
+        volumes:
+            - './certbot/www/:/var/www/certbot/:rw'
+            - './certbot/conf/:/etc/letsencrypt/:rw'
+    mysql:
+        image: 'mysql/mysql-server:8.0'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        volumes:
+            - 'turnItOff-mysql:/var/lib/mysql'
+        networks:
+            - turnItOff
+    php:
+        build:
+            context: ./docker
+            dockerfile: php.dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        volumes:
+            - .:/var/www/html:delegated
+        networks:
+            - turnItOff
+    phpmyadmin:
+        image: 'phpmyadmin:latest'
+        depends_on:
+            - mysql
+        environment:
+            PMA_HOST: mysql   # define the address/hostname of the mysql server eg mysql container name.
+            PMA_PORT: 3306
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            UPLOAD_LIMIT: 300M
+            #      PMA_USER: '${DB_USERNAME}'
+            PMA_ARBITRARY: 1
+        ports:
+            - 8183:80
+        networks:
+            - turnItOff
+    composer:
+        build:
+            context: ./docker
+            dockerfile: composer.dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        volumes:
+            - .:/var/www/html
+        working_dir: /var/www/html
+        depends_on:
+            - php
+        user: laravel
+        networks:
+            - turnItOff
+volumes:
+    turnItOff-mysql:
+        driver: local

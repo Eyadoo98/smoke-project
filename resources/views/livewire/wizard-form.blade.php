@@ -39,6 +39,9 @@
                     text-align: center !important;
                     text-align: -moz-center !important;
                 }
+                .stepwizard{
+                    margin-top: 10px;
+                }
             </style>
         <div class="stepwizard">
             <div class="stepwizard-row setup-panel">
